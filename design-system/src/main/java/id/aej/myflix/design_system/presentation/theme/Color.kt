@@ -12,5 +12,8 @@ val Pink40 = Color(0xFF7D5260)
 
 val RedPrimary = Color(0xFFFF3B30)
 val Dark = Color(0xFF09090F)
+val SecondaryDark = Color(0xFF232323)
 val Gray = Color(0xFF575758)
 val Gray15 = Color(0xFF262629)
+val DarkTransparent = Color(0x26000000)
+val LightTransparent = Color(0x26FFFFFF)

@@ -111,7 +111,20 @@ import id.aej.myflix.design_system.presentation.theme.Gray15
         .fillMaxWidth(),
       input = passwordInput,
       keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-      visualTransformation = VisualTransformation.None,
+      visualTransformation = if (isShowPassword) VisualTransformation.None else PasswordVisualTransformation(),
+      trailingIcon = {
+        IconButton(
+          onClick = {
+            isShowPassword = !isShowPassword
+          }
+        ) {
+          Icon(
+            imageVector = if (isShowPassword) Icons.Filled.VisibilityOff else Icons.Filled.Visibility,
+            contentDescription = null,
+            tint = Gray
+          )
+        }
+      },
       label = R.string.password_txt,
       placeholder = R.string.password_placeholder,
       onValueChange = {

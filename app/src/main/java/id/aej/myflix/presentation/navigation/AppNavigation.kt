@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import id.android.api.HomeFeature
 import id.aej.myflix.auth.api.AuthFeature
 import id.aej.myflix.design_system.utils.register
 
@@ -16,7 +17,8 @@ import id.aej.myflix.design_system.utils.register
   modifier: Modifier = Modifier,
   startDestination: String,
   navController: NavHostController,
-  authFeature: AuthFeature
+  authFeature: AuthFeature,
+  homeFeature: HomeFeature
 ) {
 
   NavHost(
@@ -29,6 +31,11 @@ import id.aej.myflix.design_system.utils.register
       authFeature,
       navController
     )
+    register(
+      homeFeature,
+      navController
+    )
+
 
   }
 

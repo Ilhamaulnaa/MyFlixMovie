@@ -49,7 +49,8 @@ import id.aej.myflix.design_system.presentation.theme.Gray15
  */
 
 @Composable fun LoginScreen(
-  onToRegister: () -> Unit
+  onToRegister: () -> Unit,
+  onToHome: () -> Unit
 ) {
   var emailInput by remember {
     mutableStateOf(InputWrapper(""))
@@ -129,9 +130,10 @@ import id.aej.myflix.design_system.presentation.theme.Gray15
         .fillMaxWidth()
         .padding(horizontal = 24.dp)
         .padding(top = 36.dp),
-      buttonText = R.string.sign_in_txt
+      buttonText = R.string.sign_in_txt,
     ) {
       // TODO: On sign in button click
+      onToHome()
     }
     Text(
       modifier = Modifier
