@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
 import id.android.api.HomeFeature
 import dagger.hilt.android.AndroidEntryPoint
+import id.aej.myflix.api.FavoriteFeature
 import id.aej.myflix.auth.api.AuthFeature
 import id.aej.myflix.design_system.presentation.theme.MyFlixTheme
 import id.aej.myflix.presentation.navigation.AppBottomBar
@@ -34,13 +35,17 @@ class MainActivity : ComponentActivity() {
   @Inject
   lateinit var homeFeature: HomeFeature
 
+  @Inject
+  lateinit var favoriteFeature: FavoriteFeature
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContent {
       MyFlixTheme {
         MyFlixApp(
           authFeature,
-          homeFeature
+          homeFeature,
+          favoriteFeature
         )
       }
     }
@@ -49,7 +54,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable fun MyFlixApp(
   authFeature: AuthFeature,
-  homeFeature: HomeFeature
+  homeFeature: HomeFeature,
+  favoriteFeature: FavoriteFeature
 ) {
   val navController = rememberNavController()
 
@@ -65,7 +71,8 @@ class MainActivity : ComponentActivity() {
         startDestination = authFeature.authRoute,
         navController = navController,
         authFeature = authFeature,
-        homeFeature = homeFeature
+        homeFeature = homeFeature,
+        favoriteFeature = favoriteFeature
       )
       AppBottomBar(
         modifier = Modifier
@@ -73,7 +80,8 @@ class MainActivity : ComponentActivity() {
           .clip(RoundedCornerShape(percent = 50))
           .background(color = Color.White),
         navController = navController,
-        homeFeature = homeFeature
+        homeFeature = homeFeature,
+        favoriteFeature = favoriteFeature
       )
     }
 

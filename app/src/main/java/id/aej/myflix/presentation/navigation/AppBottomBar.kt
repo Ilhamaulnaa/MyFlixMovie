@@ -33,6 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import id.aej.myflix.api.FavoriteFeature
 import id.aej.myflix.design_system.presentation.components.FlixBottomNavigationItem
 import id.aej.myflix.design_system.presentation.theme.LightTransparent
 import id.aej.myflix.design_system.presentation.theme.MyFlixTheme
@@ -48,12 +49,14 @@ import id.android.api.HomeFeature
 fun AppBottomBar(
     modifier: Modifier,
     navController: NavController,
-    homeFeature: HomeFeature
+    homeFeature: HomeFeature,
+    favoriteFeature: FavoriteFeature
 ) {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestinations = navBackStackEntry?.destination
     val destinations = listOf(
-        homeFeature.homeRoute
+        homeFeature.homeRoute,
+        favoriteFeature.favoriteRoute
         //TODO: add another screen
     )
     var xIndicatorOffset by remember {
@@ -116,7 +119,16 @@ fun AppBottomBar(
                             }
                         },
                     selected = isSelected,
-                    onClick = { navController.navigate(it.route) },
+                    onClick = {
+                        navController.navigate(it.route) {
+                            //u/ kembali kehalaman sebelumnya, agar tidak membuat halaman baru
+                            popUpTo(homeFeature.homeRoute){
+                                saveState = true
+                            }
+                            restoreState = true
+                            launchSingleTop = true
+                        }
+                    },
                     icon = {
                         Icon(
                             painter = painterResource(id = icon),

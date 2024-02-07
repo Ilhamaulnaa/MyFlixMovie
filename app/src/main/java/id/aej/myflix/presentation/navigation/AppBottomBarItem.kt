@@ -14,7 +14,7 @@ val TabDestinations = listOf(
         unselectedIcon = id.aej.myflix.design_system.R.drawable.ic_home_outlined
     ),
     Tab(
-        route = "bookmark",
+        route = "favorite",
         selectedIcon = id.aej.myflix.design_system.R.drawable.ic_bookmark_filled,
         unselectedIcon = id.aej.myflix.design_system.R.drawable.ic_bookmark_outlined
     ),

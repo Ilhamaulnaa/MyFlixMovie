@@ -1,7 +1,11 @@
+import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
+
 @Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
   alias(libs.plugins.com.android.library)
   alias(libs.plugins.org.jetbrains.kotlin.android)
+  alias(libs.plugins.dagger.hilt.android)
+  alias(libs.plugins.kotlin.kapt)
 }
 
 android {
@@ -28,14 +32,33 @@ android {
   kotlinOptions {
     jvmTarget = "17"
   }
+  buildFeatures {
+    compose = true
+  }
+  composeOptions {
+    kotlinCompilerExtensionVersion = "1.4.3"
+  }
+  packaging {
+    resources {
+      excludes += "/META-INF/{AL2.0,LGPL2.1}"
+    }
+  }
 }
 
 dependencies {
 
+  api(project(":feature-favorite:api"))
+  api(project(":design-system"))
+  implementation(project(":core-data"))
   implementation(libs.core.ktx)
   implementation(libs.appcompat)
   implementation(libs.material)
   testImplementation(libs.junit)
+
+  implementation(libs.navigation.compose)
+  implementation(libs.bundles.hilt.dagger)
+  kapt(libs.hilt.android.compiler)
+
   androidTestImplementation(libs.androidx.test.ext.junit)
   androidTestImplementation(libs.espresso.core)
 }
